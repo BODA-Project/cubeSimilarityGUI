@@ -1,0 +1,38 @@
+td {
+    text-align:center;
+
+        
+}
+
+.data {
+    border-spacing: 5px;
+    border-radius: 5px;
+    opacity: 1
+}
+
+.data-1 {
+    border: 1px solid red;
+
+}
+
+.data-2 {
+    border: 1px solid blue;
+    
+}
+
+.dark {
+   
+}
+
+.light {
+    opacity: 0.2
+}
+
+.selected {
+    background-color:azure;
+}
+
+.value {
+    opacity: 1
+}
+

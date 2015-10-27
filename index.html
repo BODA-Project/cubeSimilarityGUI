@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CubeSimilarity</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">CubeSimilarity</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Overview</a></li>
+                    <li><a href="#m">Metrics</a></li>
+                    <li><a href="#">Cubes</a></li>
+                    <li><a href="#">Similarity</a></li>
+                    <li><a href="#">Ranking</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Cube preivew: 
+            </div>
+            <div class="panel-body">
+                <select id="previewSelect"></select><br/><br/>
+                <button id="requestCubeDetail">Get cube</button>
+                
+                <hr/>
+                <div id="cube"></div>
+                    
+            </div>
+        </div>
+        
+        
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Get similarity:
+            </div>
+            <div class="panel-body">
+                Select cube1: <select id="simSelect"></select><br/>
+                Select cube2: <select id="simSelect2"></select><br/>
+                Select metric: <select id="metricSimSelect"></select><br/>
+                Select matrix aggregation: <select id="simMatrixAggr"></select><br/><br/>
+                <button id="similarity">Get similarity</button>
+                
+                <hr/>
+                
+                <b>Similarity:</b>&nbsp; <span id="similarityValue"></span>
+                
+                <hr/>
+                
+                <b>Similiarity Matrix:</b> <br/><br/>
+                <div id="similarityMatrix"></div>
+                
+                <hr/>
+                
+                <b>Similarity Mapping:</b>
+                <div id="similairtyMapping"></div>
+                
+            </div>
+        </div>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Get ranking:
+            </div>
+            <div class="panel-body">
+                Select cube: <select id="rankSelect"></select><br/>
+                Select metric: <select id="metricRankSelect"></select><br/>
+                Select matrix aggregation: <select id="rankMatrixAggr"></select><br/><br/>
+                <button id="ranking">Get ranking</button>
+                
+                <hr/>
+                
+                <b>Ranking:</b> 
+                <ol id="rankingResult"></ol>
+                
+            </div>
+        </div>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Path Visualization:
+            </div>
+            <div class="panel-body">
+                <a href="colorStickyLabels.html">Interactive visualization: Futurama to Screenwriting</a>
+                <a href="colorStickyLabels.html"><img src="img/samplePath.png" class="img-responsive" /><a></a>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="container">
+        Cube based:
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Label equality or similarity</div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>Check for equal labels</li>
+                            <li>Compute string similarity using e.g. Jaro-Winkler or Levenshtein distance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">TBD</div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>TBD</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        Component based:
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Label equality or similarity</div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>Check for equal labels</li>
+                            <li>Compute string similarity using e.g. Jaro-Winkler or Levenshtein distance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Concept equality or sameAs extended</div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>Check for equal concepts</li>
+                            <li>Use sameAs service to find further equalities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Concept similarity based on DBPedia category hierarchy</div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>Based on label</li>
+                            <li>Disambigate to get a concept for the label (prefer DBPedia concepts)</li>
+                            <li>Find DBPedia concept using the sameAs service</li>
+                            <li>Find DBPedia categories for the concepts</li>
+                            <li>Compute length of the shortest path between the DBPedia concepts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Concept similarity based on Word2Vec</div>
+                    <div class="panel-body">
+                        TBD
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
