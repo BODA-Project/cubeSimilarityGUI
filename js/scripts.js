@@ -7,25 +7,29 @@ var getSimilarity = endpoint + "/cubes/{id}/compute-similarity";
 var getCube = endpoint + "/cubes/{id}";
 
 
-function requestCube() {
-    var id = $("#previewSelect option:selected").text();
+function requestCube(c) {
+    console.log("hello")
+    var id = $("#previewSelect-" + c + " option:selected").text();
     var url = getCube.replace("{id}", id);
-    $("#cube").empty();
+    var target = "#cube-" + c;
+    console.log(target)
+    $(target).empty();
 
     $.getJSON(url).done(function (data) {
-        $("#cube").append("<b>Id:</b> " + data.id + "<br/>");
-        $("#cube").append("<b>Label:</b> " + data.label + "<br/>");
-        $("#cube").append("<b>Concept:</b> <a href='" + data.concept + "'>" + data.concept + "</a><br/>");
-        $("#cube").append("<b>sparqlEndpoint:</b> " + data.sparqlEndpoint + "<br/>");
-        $("#cube").append("<b>#Measures:</b> " +   data.structureDefinition.measures.length + "<br/>");
-        $("#cube").append("<b>#Dimensions:</b> " + data.structureDefinition.dimensions.length + "<br/>");
-        $("#cube").append("<br/><b>Measures:</b><br/><ul>");
+        console.log(data)
+        $(target).append("<b>Id:</b> " + data.id + "<br/>");
+        $(target).append("<b>Label:</b> " + data.label + "<br/>");
+        $(target).append("<b>Concept:</b> <a href='" + data.concept + "'>" + data.concept + "</a><br/>");
+        //$(target).append("<b>sparqlEndpoint:</b> " + data.sparqlEndpoint.url + "<br/>");
+        $(target).append("<b>#Measures:</b> " +   data.structureDefinition.measures.length + "<br/>");
+        $(target).append("<b>#Dimensions:</b> " + data.structureDefinition.dimensions.length + "<br/>");
+        $(target).append("<br/><b>Measures:</b><br/><ul>");
         $.each(data.structureDefinition.measures, function(index, value) {
-            $("#cube").append("<li><a href='" + value.concept + "'>" + value.concept + "</a> : " + value.label + "</li>");
+            $(target).append("<li><a href='" + value.concept + "'>" + value.concept + "</a> : " + value.label + "</li>");
         });
-        $("#cube").append("</ul><br/><b>Dimensions:</b><br/><ul>");
+        $(target).append("</ul><br/><b>Dimensions:</b><br/><ul>");
         $.each(data.structureDefinition.dimensions, function(index, value) {
-            $("#cube").append("<li><a href='" + value.concept + "'>" + value.concept + "</a> : " + value.label + "</li>");
+            $(target).append("<li><a href='" + value.concept + "'>" + value.concept + "</a> : " + value.label + "</li>");
         });
     });
 }
@@ -58,7 +62,7 @@ function requestSimilarity() {
         $("#similarityMatrix").append("</table>");
         
         if (data.similarityMatrix.mapping != null) {
-            $("#similairtyMapping").append("r : c<br/>");
+            $("#similairtyMapping").append("<b>row : column</b><br/>");
             $.each(data.similarityMatrix.mapping, function(index, value) {
                 $("#similairtyMapping").append(index + " : " + value + "<br/>");
             });
@@ -96,7 +100,8 @@ function requestCubes() {
     }).done(function (data) {
         $("#cubeList").empty();
         $.each(data, function (i) {
-            $("#previewSelect").append("<option>" + data[i].id + "</option>");
+            $("#previewSelect-1").append("<option>" + data[i].id + "</option>");
+            $("#previewSelect-2").append("<option>" + data[i].id + "</option>");
             $("#simSelect").append("<option>" + data[i].id + "</option>");
             $("#simSelect2").append("<option>" + data[i].id + "</option>");
             $("#rankSelect").append("<option>" + data[i].id + "</option>");
@@ -136,5 +141,10 @@ $(document).ready(function () {
 
     $("#ranking").click(requestRanking);
     $("#similarity").click(requestSimilarity);
-    $("#requestCubeDetail").click(requestCube);
+    $("#requestCubeDetail-1").click(function() {
+        requestCube("1")
+    });
+    $("#requestCubeDetail-2").click(function() {
+        requestCube("2")
+    });
 });
